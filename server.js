@@ -1,35 +1,18 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const PORT = process.env.PORT ||3000
+const router = require('./routes')
 const app =  express();
+
+// Define middleware here
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(router)
+
 // DB config
-const db = require('./config/key').mongoURL
-
-// Connect to mongoose
-mongoose
-.connect(db)
-.then(()=>console.log('MongoDB Connected'))
-.catch(err => console.log(err))
-
-// Get Routes
-const books = require('./routes/api/books')
-const users = require('./routes/api/users')
-const profile = require('./routes/api/profile')
-
-
-// Use Routes
-app.use('/api/books', books)
-app.use('/api/users', users)
-app.use('/api/profile', profile)
-
-//Root Router
-app.get('/',(req, res)=>{
-     res.json({Hello:'Greeting from here'})
-})
-
-
-
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 
 app.listen(PORT, ()=>{
-     console.log(`Server running on port ${PORT}`)
+     console.log(` Server listen to port ${PORT}`)
 })
+

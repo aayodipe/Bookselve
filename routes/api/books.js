@@ -1,8 +1,19 @@
 const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
+const controllers = require('../../controllers/index')
 
-router.get('/test', (req, res )=>{
-     res.json({hello:"more"})
-})
 
-module.exports = router
+// Matches with "/api/books"
+router.route('/')
+  .get(controllers.findAll)
+  .post(controllers.create)
+
+
+
+// Matches with "/api/books/:id"
+  router.route('/:title')
+  .get(controllers.findOne)
+  .put(controllers.updateOne)
+  .delete(controllers.deleteOne)
+
+  module.exports = router
