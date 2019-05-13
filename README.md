@@ -25,5 +25,5 @@ To used this application as a developer or for any purpose other than end-user, 
 * Then run ``` cd ..``` to go back to the root of the folder.
 Finally, run ``` npm start ``` to start the application.
 
-# Screenshot
+
 
